@@ -28,22 +28,21 @@ bool isLoading = true;
 float fireAnim = 0.0f;
 float loadingProgress = 0.0f;
 
-// Siang/Malam
 bool isDay = true; 
 
 // transformasi balon
-float balScale = 1.0f;      // Skala awal
-float balAngle = 0.0f;      // Sudut rotasi
-float balTx = 0.0f;         // Geser X
-float balTy = 0.0f;         // Geser Y
-float balTz = 0.0f;         // Geser Z
+float balScale = 1.0f;      
+float balAngle = 0.0f;      
+float balTx = 0.0f;         
+float balTy = 0.0f;         
+float balTz = 0.0f;         
 
-// TRANSFORMASI KADO 
+// transformasi kado
 float giftTx[3] = {0, 0, 0};
 float giftTy[3] = {0, 0, 0};
 float giftTz[3] = {0, 0, 0};
 
-int activeGift = 0; // kado aktif (0,1,2)
+int activeGift = 0; 
 
 
 // ================= INIT ======================
@@ -78,7 +77,7 @@ void setupLighting() {
         glLightModelfv(GL_LIGHT_MODEL_AMBIENT, globalAmbient);
 
     } else {
-        // MODE MALAM ---
+        // MALAM 
         glClearColor(0.05f, 0.05f, 0.1f, 1.0f);
 
         GLfloat nightAmbient[] = {0.05f, 0.05f, 0.05f, 1.0f};
@@ -280,7 +279,7 @@ void display() {
 
 glEnable(GL_LIGHTING);
 
-    // ================= MEJA ===================
+    // ================= MEJA (agni) ===================
     GLfloat woodSpec[] = {0.25f, 0.15f, 0.05f, 1};
     glMaterialfv(GL_FRONT, GL_SPECULAR, woodSpec);
     glPushMatrix();
@@ -299,7 +298,7 @@ glEnable(GL_LIGHTING);
             }
     glPopMatrix();
 
-	// ================= KADO =================
+	// ================= KADO (amel) =================
 	GLfloat giftSpec[] = {0.9f, 0.9f, 0.9f, 1};
 	glMaterialfv(GL_FRONT, GL_SPECULAR, giftSpec);
 	
@@ -369,7 +368,7 @@ for (int i = 0; i < 3; i++) {
     glPopMatrix();
 }
 
-	// ================= KUE ULANG TAHUN =================
+	// ================= KUE (rovi) =================
 	GLfloat cakeSpec[] = {0.08f, 0.08f, 0.08f, 1};
 	glMaterialfv(GL_FRONT, GL_SPECULAR, cakeSpec);
 	
@@ -505,7 +504,7 @@ for (int i = 0; i < 3; i++) {
         // Scale
         glScalef(balScale, balScale, balScale);
 
-        // ---------- BALON ----------
+        // ============ BALON (aina) ===========
         glColor3ub(255, 80, 120);
         glPushMatrix();
             glTranslatef(0, 3.5f, 0);
@@ -528,7 +527,7 @@ for (int i = 0; i < 3; i++) {
             glutSolidTorus(0.15, 0.45, 16, 24);
         glPopMatrix();
 
-        // ---------- HIASAN BALON ----------
+        // HIASAN
         glColor3ub(255, 215, 215);
         glPushMatrix();
             glTranslatef(0, 0.5f, 0.2f);
@@ -582,7 +581,7 @@ for (int i = 0; i < 3; i++) {
             glPopMatrix();
         glPopMatrix();
 
-        // ---------- TALI BALON ----------
+        // TALI
         glColor3ub(50, 50, 50);
         glPushMatrix();
             glTranslatef(0, 1.4f, 0);
@@ -625,7 +624,7 @@ void keyboard(unsigned char key, int, int) {
         else      std::cout << "Mode: MALAM (Lilin Nyala)" << std::endl;
     }
 
-    // [LOGIKA BARU: KONTROL BALON]
+    //KONTROL BALON]
     // 1. ROTATE
     if (key == 'r' || key == 'R') {
         balAngle += 5.0f;
@@ -694,22 +693,22 @@ void mouseMotion(int x, int y) {
 void setAutoPOV(int view) {
     switch (view) {
 
-        case 1: // KIRI (di dalam dinding kiri)
+        case 1: // KIRI 
             camX = -45; camY = 10; camZ = 0;
             camYaw = 90; camPitch = 0;
             break;
 
-        case 2: // KANAN (di dalam dinding kanan)
+        case 2: // KANAN 
             camX = 45; camY = 10; camZ = 0;
             camYaw = -90; camPitch = 0;
             break;
 
-        case 3: // ATAS (di bawah plafon, TOP-DOWN)
+        case 3: // ATAS 
             camX = 0; camY = 33; camZ = 0;
             camYaw = 0; camPitch = -89;
             break;
 
-        case 4: // BAWAH (di atas lantai)
+        case 4: // BAWAH 
             camX = 0; camY = -10; camZ = 0;
             camYaw = 0; camPitch = 15;
             break;
@@ -725,7 +724,7 @@ void idle() {
 
             float rad = orbitAngle * PI / 180.0f;
 
-            // POSISI KAMERA ORBIT (LUAR + ATAS)
+            // orbit kamera
             camX = cos(rad) * orbitRadius;
             camZ = sin(rad) * orbitRadius;
             camY = orbitHeight;
